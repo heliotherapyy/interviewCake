@@ -1,49 +1,38 @@
-var array = [10,5,7,15,20,2,4,-123,-354,435,1,3254];
-
 function quickSort(array, start, end) {
   if (start < end) {
     var partition = getPartition(array, start, end);
-
     quickSort(array, start, partition - 1);
     quickSort(array, partition + 1, end);
-
-    console.log(array);
   }
 }
 
 function getPartition(array, start, end) {
   var pivot = array[start];
+  var left = start + 1;
+  var right = end;
 
-  var i = start;
-  var j = end;
-
-  i++;
-
-  while (true) {
-    while (array[i] <= pivot) {
-      i++;
+  while (left < right) {
+    while (array[left] < pivot) {
+      left++;
     }
-
-    while (array[j] > pivot) {
-      j--;
+    while (array[right] > pivot) {
+      right--;
     }
-
-    if (i > j) {
-      swap(array, start, j);
-      break;
-    } else {
-      swap(array, i, j);
+    if (left < right) {
+      swap(array, left, right);
     }
   }
-
-  return j;
+  if (pivot > array[right]) {
+    swap(array, start, right);
+  }
 }
 
-function swap(array, first, second) {
-  var temp = array[first];
-  array[first] = array[second];
-  array[second] = temp;
+function swap(array, i, j) {
+  var temp = array[j];
+  array[j] = array[i];
+  array[i] = temp;
 }
 
-debugger;
-quickSort(array, 0, array.length - 1);
+var array = [1,10,12,4,7,3,9,18];
+quickSort(array, 0, array.length -1);
+
