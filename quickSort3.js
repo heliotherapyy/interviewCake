@@ -1,8 +1,8 @@
 function quickSort(array, start, end) {
   if (start < end) {
-    var partition = getPartition(array, start, end);
-    quickSort(array, start, partition - 1);
-    quickSort(array, partition + 1, end);
+    var mid = getPartition(array, start, end);
+    quickSort(array, start, mid -1);
+    quickSort(array, mid + 1, end);
   }
 
   console.log(array);
@@ -22,14 +22,18 @@ function getPartition(array, start, end) {
     }
     if (left < right) {
       swap(array, left, right);
+    } else {
+      break;
     }
   }
+
   if (pivot > array[right]) {
     swap(array, start, right);
   }
 
   return right;
 }
+
 
 function swap(array, i, j) {
   var temp = array[j];
@@ -38,5 +42,4 @@ function swap(array, i, j) {
 }
 
 var array = [1,10,12,4,7,3,9,18];
-quickSort(array, 0, array.length -1);
-
+quickSort(array, 0, array.length - 1);

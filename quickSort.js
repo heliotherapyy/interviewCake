@@ -37,13 +37,17 @@ function partition (array, left, right) {
     }
   }
 
-  swap(array, first, right);
+  if (array[first] > array[right]) {
+    swap(array, first, right);
+  }
+
   return right;
 }
 
-// var array = [202,1,5,4,54,345,2,6];
-// debugger;
-// quickSort(array, 0 , array.length - 1);
+var array = [202,1,5,4,54,345,2,6];
+// var array = [1, 10];
+debugger;
+quickSort(array, 0 , array.length - 1);
 
 
 
