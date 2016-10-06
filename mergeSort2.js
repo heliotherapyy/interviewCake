@@ -45,7 +45,7 @@
 //   }
 // }
 
-var array = [2,10,4,1,34,23];
+var array = [2,10,4,1,34,23, 10];
 // mergeSort(array, 0 , array.length -1);
 
 

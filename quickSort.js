@@ -1,65 +1,9 @@
-function quickSort (array, left, right) {
-  if (left < right) {
-    var index = partition(array, left, right);
-
-    quickSort(array, left, index - 1);
-    quickSort(array, index + 1, right);
-  }
-
-  console.log(array);
-}
-
-function swap(array, i, j) {
-  var temp = array[j];
-  array[j] = array[i];
-  array[i] = temp;
-}
-
-function partition (array, left, right) {
-  var first = left;
-  var pivot = array[first];
-
-  left++;
-
-  while (left < right) {
-    while (array[left] <= pivot) {
-      left++;
-    }
-
-    while (array[right] > pivot) {
-      right--;
-    }
-
-    if (left < right) {
-      swap(array, left, right);
-    } else {
-      break;
-    }
-  }
-
-  if (array[first] > array[right]) {
-    swap(array, first, right);
-  }
-
-  return right;
-}
-
-var array = [202,1,5,4,54,345,2,6];
-// var array = [1, 10];
-debugger;
-quickSort(array, 0 , array.length - 1);
-
-
-
-
-
-
-function quickSort2(array, start, end) {
+function quickSort1(array, start, end) {
   if (start < end) {
     var partition = getPartition(array, start, end);
 
-    quickSort2(array, start, partition - 1);
-    quickSort2(array, partition + 1, end);
+    quickSort1(array, start, partition - 1);
+    quickSort1(array, partition + 1, end);
   }
 
   console.log(array);
@@ -74,7 +18,7 @@ function getPartition(array, start, end) {
   var right = end;
 
   while (left < right) {
-    while (array[left] < pivot) {
+    while (array[left] <= pivot) {
       left++;
     }
 
@@ -92,8 +36,15 @@ function getPartition(array, start, end) {
   return right;
 }
 
-var array = [1,10,12,4,7,3,9,18];
-debugger; quickSort2(array, 0, array.length -1);
+function swap(array, start, end) {
+  var temp = array[start];
+  array[start] = array[end];
+  array[end] = temp;
+}
+
+var array = [1,10,12,4,7,3,9,18, 10, 10, 10];
+var array = [10,20,10];
+debugger; quickSort1(array, 0, array.length -1);
 
 
 
