@@ -17,36 +17,62 @@ function bracketValidator(string, start, end) {
       return false;
     }
 
-    findInnerPairs(innerPairs, string, start + 1, end - 1);
-    innerPairs.forEach(function(pair) {
-      return bracketValidator(string, pair[0], pair[1]);
-    })
+    innerPairs = findInnerPairs(innerPairs, string, start + 1, end - 1);
+    if (innerPairs !== -1) {
+      innerPairs.forEach(function(pair) {
+        return bracketValidator(string, pair[0], pair[1]);
+      });
+    } else {
+      return false;
+    }
   }
+
+  return true;
 }
 
 function findInnerPairs(array, string, start, end) {
-  while (start < end) {
-    var first = string[start];
-    var count = 0;
+  var length = (end - start) + 1;
+  if (length % 2 !== 0) {
+    return -1;
+  }
 
-    if (isOpeningBracket(first)) {
-      count++;
-      var index = start + 1;
-      while (index <= end) {
-        if (arr[index] === first) count++;
-        else if (arr[index] === findMatch(first)) count--;
-        index++;
-        if (!count) {
-          array.push([start, index - 1]);
-          start = index;
-          break;
-        } else if (index > end) {
-          break;
-        }
+  while (start < end) {
+    var matchingIndex = findMatchingBracket(string, start);
+    if (machingIndex !== -1) {
+      array.push([start, matchingIndex]);
+      if (matchingIndex < end - 1) {
+        start = matchingIndex + 1;
+      } else {
+        return -1;
       }
+    } else {
+      return -1;
     }
   }
-  console.log(array);
+}
+
+function findMatchingBracket(string, index) {
+  if (index < 0 || index > string.length - 1) {
+    return -1;
+  }
+
+  var found;
+  var count = 0;
+  for (var i = index; i < string.length; i++) {
+
+    if (string[i] === "(" || string[i] === "{" || string[i] === "[") {
+      count++;
+    } else if (string[i] === ")") {
+      count--;
+    }
+
+    if (!count) {
+      found = i;
+      return found;
+    }
+  }
+
+  return -1;
 }
 
 var string = "(){}[[]]"
