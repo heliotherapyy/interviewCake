@@ -4,6 +4,8 @@
 "{ [ }" should return false
 */
 
+var brackets = ["{", "[", "("];
+
 function bracketValidator(string, start, end) {
   if (start === end || (end - start + 1) % 2 !== 0) {
     return false;
@@ -17,7 +19,7 @@ function bracketValidator(string, start, end) {
       return false;
     }
 
-    findInnerPairs(innerPairs, string, start + 1, end - 1);
+    var flag = findInnerPairs(innerPairs, string, start + 1, end - 1);
     innerPairs.forEach(function(pair) {
       return bracketValidator(string, pair[0], pair[1]);
     })
@@ -25,16 +27,15 @@ function bracketValidator(string, start, end) {
 }
 
 function findInnerPairs(array, string, start, end) {
+  var count = 0;
   while (start < end) {
     var first = string[start];
-    var count = 0;
-
     if (isOpeningBracket(first)) {
       count++;
       var index = start + 1;
       while (index <= end) {
-        if (arr[index] === first) count++;
-        else if (arr[index] === findMatch(first)) count--;
+        if (string[index] === first) count++;
+        else if (string[index] === findMatch(first)) count--;
         index++;
         if (!count) {
           array.push([start, index - 1]);
@@ -49,6 +50,27 @@ function findInnerPairs(array, string, start, end) {
   console.log(array);
 }
 
-var string = "(){}[[]]"
+function isOpeningBracket(char) {
+  for (var i = 0; i < brackets.length; i++) {
+    if (brackets[i] === char) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function findMatch(char) {
+  if (char === "{") return "}";
+  else if (char === "[") return "]";
+  else if (char === "(") return ")";
+  return null;
+}
+
+var matched = findMatch("(")
+console.log(matched);
+
+var string = "()[[]"
 var array = [];
-findInnerPairs(array, string, 0, string.length - 1);
+// debugger; findInnerPairs(array, string, 0, string.length - 1);
+
