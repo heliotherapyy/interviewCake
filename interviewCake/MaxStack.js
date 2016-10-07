@@ -21,7 +21,11 @@ MaxStack.prototype.pop = function() {
     if (!this.items.length) {
         return null;
     }
-    return this.items.pop();
+    var popped =  this.items.pop();
+    if (popped === this.max) {
+        this.max = getMax(this.items);
+    }
+    return popped;
 };
 
 // see what the last item is
@@ -36,11 +40,22 @@ MaxStack.prototype.getMax = function() {
     return this.max;
 }
 
+function getMax(array) {
+    var max = array[0];
+
+    for (var i = 1 ; i < array.length; i++) {
+        max = Math.max(max, array[i]);
+    }
+
+    return max;
+}
+
 var stack = new MaxStack();
 stack.push(10);
-stack.push(1234);
 stack.push(12);
 stack.push(765);
 stack.push(1);
+stack.push(1234);
+stack.pop();
 var answer = stack.getMax();
 console.log(answer);
