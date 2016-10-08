@@ -1,4 +1,5 @@
 var string = 'Add milk and eggs, then add flour and sugar.';
+var string =   'We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake.'
 
 function wordCloud(string) {
   var cloud = {};
