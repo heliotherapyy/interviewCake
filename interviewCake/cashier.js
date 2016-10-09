@@ -54,6 +54,7 @@ var amount = 1;
 var denominations = [2,3];
 // debugger; findCombinations(amount, denominations, [], []);
 
+
 function findCombinations(amount, denominations) {
   var cache = {
 
@@ -64,16 +65,17 @@ function findCombinations(amount, denominations) {
   }
 
   var n = 1;
+  var combinations = [];
   while (n <= amount) {
     for (var i = 0; i < denominations.length; i++) {
       var coin = denominations[i];
-      if (coin > amount) {
+      if (coin > n) {
         continue;
-      } else if (coin === amount) {
+      } else if (coin === n) {
         cache[n]++;
       } else {
-        var remainder = amount - coin;
-        if (cache[remainder] !== 0) {
+        var remainder = n - coin;
+        if (remainder >= coin && cache[remainder] !== 0) {
           cache[n]++;
         }
       }
@@ -83,5 +85,5 @@ function findCombinations(amount, denominations) {
   console.log(cache[amount]);
 }
 
-findCombinations(5, [2,3,5]);
+debugger; findCombinations(10, [2,3,5]);
 
