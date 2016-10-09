@@ -50,6 +50,38 @@ function findCombinations(amount, coins, combi, results) {
 }
 
 
-var amount = 4;
-var denominations = [1,2,3];
-debugger; findCombinations(amount, denominations, [], []);
+var amount = 1;
+var denominations = [2,3];
+// debugger; findCombinations(amount, denominations, [], []);
+
+function findCombinations(amount, denominations) {
+  var cache = {
+
+  };
+
+  for (var i = 1; i <= amount; i++) {
+    cache[i] = 0;
+  }
+
+  var n = 1;
+  while (n <= amount) {
+    for (var i = 0; i < denominations.length; i++) {
+      var coin = denominations[i];
+      if (coin > amount) {
+        continue;
+      } else if (coin === amount) {
+        cache[n]++;
+      } else {
+        var remainder = amount - coin;
+        if (cache[remainder] !== 0) {
+          cache[n]++;
+        }
+      }
+    }
+    n++;
+  }
+  console.log(cache[amount]);
+}
+
+findCombinations(5, [2,3,5]);
+
