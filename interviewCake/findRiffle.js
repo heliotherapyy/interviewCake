@@ -4,6 +4,10 @@
 */
 
 function isRiffled(array) {
+	if (array.length === 0) {
+		return true;
+	}
+
 	var i = 1;
 	
 	// holds last card from each subdeck
