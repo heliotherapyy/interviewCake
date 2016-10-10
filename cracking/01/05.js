@@ -7,51 +7,82 @@
 */
 
 // 9.1.16
-var findCount = (string, milestone) => {
-  if (string.length < 2) {
-    return 1;
-  }
+// var findCount = (string, milestone) => {
+//   if (string.length < 2) {
+//     return 1;
+//   }
 
-  const alphabet = string[milestone];
-  let count = 1;
-  let nextChar = string[milestone + 1];
+//   const alphabet = string[milestone];
+//   let count = 1;
+//   let nextChar = string[milestone + 1];
 
-  while (nextChar === alphabet) {
-    count++;
-    nextChar = string[milestone + count]
-  }
+//   while (nextChar === alphabet) {
+//     count++;
+//     nextChar = string[milestone + count]
+//   }
 
-  return count;
-}
+//   return count;
+// }
 
-var compress = (string) => {
-  // input test
-  if (!string) {
-    return null;
-  } else if (typeof string !== 'string') {
-    console.error("Please insert valid string");
-  }
+// var compress = (string) => {
+//   // input test
+//   if (!string) {
+//     return null;
+//   } else if (typeof string !== 'string') {
+//     console.error("Please insert valid string");
+//   }
 
-  var count = 0;
-  var milestone = 0;
-  var alphabet;
+//   var count = 0;
+//   var milestone = 0;
+//   var alphabet;
+//   var result = "";
+
+//   while (milestone !== string.length) {
+//     alphabet = string[milestone];
+//     count = findCount(string, milestone);
+
+//     result += (alphabet + count);
+//     milestone += count;
+//   }
+
+//   if (result.length >= string.length) {
+//     return string;
+//   }
+
+//   return result;
+// }
+
+/*
+  October 10th
+*/
+function compress(string) {
+  var index = 1;
+  var curr;
+  var prev = string[0];
   var result = "";
+  var count = 1;
 
-  while (milestone !== string.length) {
-    alphabet = string[milestone];
-    count = findCount(string, milestone);
-
-    result += (alphabet + count);
-    milestone += count;
+  while (index < string.length) {
+    curr = string[index];
+    if (curr === prev) {
+      count++;
+    } else {
+      result += (prev + count);
+      count = 1;
+    }
+    prev = curr;
+    index++;
   }
 
-  if (result.length >= string.length) {
-    return string;
-  }
+  result += (prev + count);
 
-  return result;
+  if (string.length >= result.length) {
+    console.log(result);
+  } else {
+    console.log(string);
+  }
 }
 
-compress("aabcccccccaaa");
+debugger; compress("aabcccccccaaa");
 compress("akddsfdddaaaaa");
 compress("aaaabbccehs");
