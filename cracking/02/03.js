@@ -21,7 +21,7 @@ B.next = C;
 C.next = D;
 D.next = E;
 
-
+/*
 // 09.02.16
 var removeNodeWrong = (head, target) => {
   let traverse = head;
@@ -48,3 +48,25 @@ var removeNodeRight = (target) => {
   target.data = node.data;
   target.next = node.next;
 }
+*/
+
+/*
+  October 11th
+*/
+
+function deleteTarget(target) {
+  while (target) {
+    var next = target.next;
+    if (!next) {
+      target = null;
+      return;
+    } else {
+      target.data = next.data;
+      target.next = next.next;
+      target = target.next;
+    }
+  }
+}
+
+deleteTarget(C);
+console.log(A);
