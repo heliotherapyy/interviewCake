@@ -78,65 +78,157 @@ root_rightRightRight = root_rightRight.right = new Node(50);
 root_rightRightRight.right = new Node(60);
 
 
-function findHeight(node) {
-  if (!node) {
-    return 0;
-  }
+// function findHeight(node) {
+//   if (!node) {
+//     return 0;
+//   }
 
-  var height = 1 + Math.max(findHeight(node.left), findHeight(node.right));
-  return height;
-}
+//   var height = 1 + Math.max(findHeight(node.left), findHeight(node.right));
+//   return height;
+// }
 
-function isBalanced(node) {
-  if (!node) {
+// function isBalanced(node) {
+//   if (!node) {
+//     return true;
+//   }
+
+//   var left_height;
+//   var right_height;
+
+//   left_height = findHeight(node.left);
+//   right_height = findHeight(node.right);
+
+//   var result;
+
+//   (Math.abs(left_height, right_height) > 1) ? result = false : result = isBalanced(node.left) && isBalanced(node.right);
+//   return result;
+// }
+
+// var answer = isBalanced(root);
+// console.log(answer);
+
+// function isBalanced2(node) {
+//   if (!node) {
+//     return 0;
+//   }
+
+//   var leftHeight = isBalanced2(node.left);
+//   if (leftHeight === -1) {
+//     return -1;
+//   }
+
+//   var rightHeight = isBalanced2(node.right);
+//   if (rightHeight === -1) {
+//     return -1;
+//   }
+
+//   var diff = Math.abs(leftHeight - rightHeight);
+//   if (diff > 1) {
+//     return -1;
+//   } else {
+//     return Math.max(leftHeight, rightHeight) + 1;
+//   }
+// }
+
+// function final(node) {
+//   if (isBalanced2(node) === -1) {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// }
+
+// debugger; var answer = final(root);
+// console.log(answer);
+
+
+/*
+  October 12th
+*/
+function isBalanced(root) {
+  var left_height = 0;
+  var right_height = 0;
+
+  if (!root) {
     return true;
   }
 
-  var left_height;
-  var right_height;
-
-  left_height = findHeight(node.left);
-  right_height = findHeight(node.right);
-
-  var result;
-
-  (Math.abs(left_height, right_height) > 1) ? result = false : result = isBalanced(node.left) && isBalanced(node.right);
-  return result;
-}
-
-var answer = isBalanced(root);
-console.log(answer);
-
-function isBalanced2(node) {
-  if (!node) {
-    return 0;
+  if (!root.left && !root.right) {
+    return true;
   }
 
-  var leftHeight = isBalanced2(node.left);
-  if (leftHeight === -1) {
-    return -1;
+  if (root.left) {
+    left_height = getHeight(root.left);
   }
 
-  var rightHeight = isBalanced2(node.right);
-  if (rightHeight === -1) {
-    return -1;
+  if (root.right) {
+    right_height = getHeight(root.right);
   }
 
-  var diff = Math.abs(leftHeight - rightHeight);
-  if (diff > 1) {
-    return -1;
-  } else {
-    return Math.max(leftHeight, rightHeight) + 1;
-  }
-}
-
-function final(node) {
-  if (isBalanced2(node) === -1) {
+  if (Math.abs(left_height - right_height) > 1) {
     return false;
   } else {
-    return true;
+    var left, right;
+    if (root.left) {
+      left = isBalanced(root.left);
+    }
+
+    if (root.right) {
+      right = isBalanced(root.right);
+    }
+
+    return left && right;
   }
 }
 
-debugger; var answer = final(root);
+function getHeight(root) {
+  if (!root) {
+    return 0;
+  }
+  var left_height = 0;
+  var right_height = 0;
+
+  if (root.left) {
+    left_height = 1 + getHeight(root.left);
+  }
+
+  if (root.right) {
+    right_height = 1 + getHeight(root.right);
+  }
+
+  return 1 + Math.max(left_height, right_height);
+}
+
+function main(root) {
+  var left = isBalanced(root.left);
+  if (!left) {
+    return false;
+  }
+  var right = isBalanced(root.right);
+  if (!right) {
+    console.log("something");
+    return false;
+  }
+
+  return true;
+}
+
+debugger; var answer = main(root);
 console.log(answer);
+
+// Optimized Version
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
