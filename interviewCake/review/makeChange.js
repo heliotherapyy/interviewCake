@@ -1,5 +1,5 @@
-var denominations = [2,3,4];
-var amount = 7;
+var denominations = [1,2,3];
+var amount = 6;
 
 /*
 
@@ -38,11 +38,7 @@ function makeChange(total, denominations) {
 				continue;
 			} else if (coin < amount) {
 				var remainder = amount - coin;
-				if (remainder === coin) {
-					cache[amount] += 1;
-				} else if (remainder > coin) {
-					cache[amount] += makeChange(remainder, denominations.slice(i));
-				}
+				cache[amount] += makeChange(remainder, denominations.slice(i));
 			}
 		}
 		amount++;
@@ -55,7 +51,6 @@ function initialize(object, number) {
 	for (var i = 1; i <= number; i++) {
 		object[i] = 0;
 	}
-	// console.log(object);
 }
 
 debugger; makeChange(amount, denominations);
