@@ -1,5 +1,5 @@
-var denominations = [1,2,3];
-var amount = 6;
+var denominations = [2,3,4];
+var amount = 7;
 
 /*
 
@@ -10,7 +10,7 @@ var amount = 6;
 5: 1 1 1 1 1 / 1 1 1 2 / 1 2 2 / 1 1 3 / 2 3 : 5
 6: 1 1 1 1 1 1 / 1 1 1 1 2 / 1 1 1 3 / 1 1 2 2 / 1 2 3 / 2 2 2 : 6
 
-	1 1 1 1 
+	1 1 1 1
 	1 1 2
 	1 3
 	2 2
@@ -39,15 +39,14 @@ function makeChange(total, denominations) {
 			} else if (coin < amount) {
 				var remainder = amount - coin;
 				if (remainder === coin) {
-					cache[amount] = cache[remainder];
+					cache[amount] += 1;
 				} else if (remainder > coin) {
 					cache[amount] += makeChange(remainder, denominations.slice(i));
 				}
 			}
 		}
-		amount++;	
+		amount++;
 	}
-	console.log(cache);
 	console.log(cache[total]);
 	return cache[total];
 }
