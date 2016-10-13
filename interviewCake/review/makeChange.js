@@ -16,7 +16,7 @@ var amount = 6;
 	2 2
 */
 
-function makeChange(total, denominations) {
+/*function makeChange(total, denominations) {
 	if (total === 0) {
 		return 0;
 	} else if (denominations.length === 0) {
@@ -53,4 +53,36 @@ function initialize(object, number) {
 	}
 }
 
-debugger; makeChange(amount, denominations);
+debugger; makeChange(amount, denominations);*/
+
+function makeChange(total, denominations) {
+	var cache = {};
+	for (var i = 0; i <= total; i++) {
+		cache[i] = 0;
+	}
+	cache[0] = 1;
+
+	for (var i = 0; i < denominations.length; i++) {
+		var coin = denominations[i];
+		for (var amount = coin; amount <= total; amount++) {
+			var remainder = amount - coin;
+			cache[amount] += cache[remainder];
+		}
+	}
+	console.log(cache[total]);
+	return cache[total];
+}
+
+makeChange(5, [1,3,5])
+
+
+
+
+
+
+
+
+
+
+
+
