@@ -86,5 +86,54 @@ function main(root) {
   return true;
 }
 
-debugger; var answer = main(root);
-console.log(answer);
+/*
+  October 13th
+*/
+
+function superBalanced(root) {
+  if (!root) {
+    return true;
+  }
+
+  if (root.left) {
+    var left_flag = superBalanced(root.left);
+    if (left_flag === -1) {
+      return -1;
+    }
+  }
+
+  if (root.right) {
+    var right_flag = superBalanced(root.right);
+    if (right_flag === -1) {
+      return -1;
+    }
+  }
+
+  var left_height = getHeight(root.left);
+  var right_height = getHeight(root.right);
+
+  if (Math.abs(left_height - right_height) > 1) {
+    return -1;
+  } else {
+    return true;
+  }
+}
+
+function getHeight(root) {
+  if (!root) {
+    return 0;
+  }
+
+  return Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+}
+
+
+function main(root) {
+  if (superBalanced(root) === -1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+debugger; main(root);
