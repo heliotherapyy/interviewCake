@@ -17,11 +17,11 @@ function findIntersection(rec1, rec2) {
   var intersect = {};
   var recs = [rec1, rec2];
 
-  intersect.leftX = sort(recs, "bottomX")[1];
-  intersect.bottomY = sort(recs, "bottomY")[1];
+  intersect.leftX = sort(recs, "bottomX")[1].leftX;
+  intersect.bottomY = sort(recs, "bottomY")[1].bottomY;
 
-  var rightX = sort(recs, "rightX")[0];
-  var upperY = sort(recs, "upperY")[0];
+  var rightX = sort(recs, "rightX")[0].leftX + sort(recs, "rightX")[0].width;
+  var upperY = sort(recs, "upperY")[0].bottomY + sort(recs, "upperY")[0].height;
 
   // if (!doesOverlap(intersect, rightX, upperY)) {
   //   return null;
