@@ -4,6 +4,27 @@
   주의: 이진 탐색 트리가 아닐 수도 있다
 */
 
+var BinaryTree = function(data) {
+  this.data = data;
+  this.left = null;
+  this.right = null;
+}
+
+var A = new BinaryTree('A');
+A.left = new BinaryTree('B');
+var B = A.left;
+A.right = new BinaryTree('C');
+var C = A.right;
+
+B.left = new BinaryTree('D');
+var D = B.left;
+B.right = new BinaryTree('E');
+C.left = new BinaryTree('F');
+C.right = new BinaryTree('G');
+
+D.left = new BinaryTree('H');
+D.left.left = new BinaryTree('J');
+
 // 0903
 /*
   BFS 로 가면서 특정 노드가 맞다고 하면,
@@ -11,7 +32,7 @@
   그리고 다시 반복
 */
 
-var covers(root, target) {
+function covers(root, target) {
   if (!root) return false;
   if (root === target) {
     return true;
@@ -22,7 +43,7 @@ var covers(root, target) {
 
 
 
-var commonAncestorHelper(root, p, q) {
+function commonAncestorHelper(root, p, q) {
   if (!root) return null;
   if (root === p || root === q) return root;
   let is_p_on_left = covers(root.left, p);

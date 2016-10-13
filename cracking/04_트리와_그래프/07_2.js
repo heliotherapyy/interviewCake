@@ -1,3 +1,4 @@
+// O(N^2)
 function commonAncestor(root, node1, node2) {
   if (!root || !node1 || !node2) {
     return false;
@@ -28,6 +29,7 @@ function commonAncestor(root, node1, node2) {
   return popped;
 }
 
+// O(N)
 function BFS_Search(root, node1, node2) {
   var queue = [];
   queue.push(root);
