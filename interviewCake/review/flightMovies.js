@@ -2,6 +2,36 @@ var total = 9;
 var array = [7,2,1,6,9,13];
 // 1 2 5 6 7 9
 // 9 7 6 5 2 1
+
+/*
+	{
+		7: true
+		2
+		1
+		6
+		9 
+		13
+	}
+*/
+
+function flightMovies2(total, array) {
+	var cache = {};
+	for (var i = 0; i < array.length; i++) {
+		var time = array[i];
+		cache[time] = true;
+	}
+
+	for (i = 0; i < array.length; i++) {
+		var remainder = total - array[i];
+		if (cache[remainder]) {
+			return true;
+		}
+	}
+}
+
+var answer = flightMovies2(total, array);
+console.log(answer);
+
 // returns boolean
 function flightMovies(total, array) {
 
