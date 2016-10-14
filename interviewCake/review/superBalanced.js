@@ -14,6 +14,7 @@ BinaryTreeNode.prototype.insertRight = function(value) {
     return this.right;
 };
 
+// Wrong
 function superBalanced(root) {
   if (!root) {
     return true;
