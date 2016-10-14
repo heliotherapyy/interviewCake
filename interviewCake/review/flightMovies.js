@@ -1,4 +1,4 @@
-var total = 12;
+var total = 9;
 var array = [7,2,1,6,9,13];
 // 1 2 5 6 7 9
 // 9 7 6 5 2 1
@@ -13,21 +13,18 @@ function flightMovies(total, array) {
 		descending.push(array[i]);
 	}
 
-	var index = 0;
+	var index1 = 0;
+	var index2 = 0;
 
-	// O(N)
-	for (var i = 0; i < ascending.length; i++) {
-		var sum = ascending[i] + descending[index];
+	while (index1 <= array.length - 1) {
+		var sum = ascending[index1] + descending[index2];
 		if (sum > total) {
-			index++;
+			index2++;
 		} else if (sum < total) {
-			index = 0;
-			continue;
+			index2 = 0;
+			index1++;
 		} else {
-			if (descending[index] === ascending[i]) {
-				continue;
-			}
-
+			(ascending[index1] === descending[index2]) ? index1++ : null;
 			return true;
 		}
 	}
@@ -78,5 +75,5 @@ function swap(array, first, second) {
 	array[second] = temp;
 }
 
-var answer = flightMovies(total, array);
+debugger; var answer = flightMovies(total, array);
 console.log(answer);
