@@ -67,19 +67,11 @@ C.right = new BinaryTree('G');
 D.left = new BinaryTree('H');
 D.left.left = new BinaryTree('J');
 
-var a = new BinaryTree('A');
-a.left = new BinaryTree('B');
-var b = a.left;
-a.right = new BinaryTree('C');
-var c = a.right;
 
+
+var b = new BinaryTree('B');
 b.left = new BinaryTree('D');
-var d = b.left;
 b.right = new BinaryTree('E');
-c.left = new BinaryTree('KK');
-c.right = new BinaryTree('G');
 
-d.left = new BinaryTree('H');
-d.left.left = new BinaryTree('J');
-
-isSame(A, a);
+debugger; var answer = isSubTree(A, b);
+console.log(answer);
