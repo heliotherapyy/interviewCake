@@ -80,4 +80,4 @@ function main(root) {
   }
 }
 
-debugger; main(A);
+debugger; console.log(main(A));
