@@ -1,4 +1,4 @@
-function findSubArrays(array, start, end) {
+]function findSubArrays(array, start, end) {
   var storage = [];
 
   var first, last;
