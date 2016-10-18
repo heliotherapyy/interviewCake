@@ -7,39 +7,27 @@ var cakeTypes = [
 var capacity = 20;
 
 function cakeThief(capacity, array) {
-	// sort cakes by first weight, then value
-	// quickSort(array, 0, array.length - 1);
-
-	// starting from weight 1, we keep incrementing its weight all the way up to capacity
-	// What we want to get is the maximum value that we can get
-	var step = 1;
-	var maxValue;
+	
 	var cache = {};
 	for (var i = 0; i <= capacity; i++) {
 		cache[i]= 0;
 	}
-
-
-
-	while (step <= capacity) {
-		for (var i = 0; i < array.length; i++) {
-			var cake = array[i];
-			for (var weight = cake.weight; weight <= capacity; weight++) {
-				if (cake.weight === weight) {
-					if (!maxValue) {
-						maxValue = cake.value;
-					}
-					maxValue = Math.max(maxValue, cake.value); 
-					cache[weight] = maxValue;
-				} else {
-					var remainder = weight - cake.weight;
-					cache[weight] += cache[remainder];
-				}
+	
+	for (var i = 0; i < array.length; i++) {
+		var cake = array[i];
+		for (var weight = cake.weight; weight <= capacity; weight++) {
+			var remainder = weight - cake.weight;
+			if (remainder === 0) {
+				cache[weight] = Math.max(cache[weight], cake.value);
+			} else {
+				var previousMax = cache[weight];
+				var candidate = cache[remainder] + cake.value;
+				cache[weight] = Math.max(previousMax, candidate);
 			}
-			
 		}
-		step++;
 	}
+
+	
 	console.log(cache);
 }
 
