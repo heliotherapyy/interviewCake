@@ -1,3 +1,6 @@
+/*
+This is wrong lol
+
 function insertionSort(array) {
   for (var i = 1 ; i < array.length ; i++) {
     if (array[i-1] <= array[i]) {
@@ -21,3 +24,4 @@ var array = [202,1,5,4,54,345,2,6];
 
 debugger;
 insertionSort(array);
+*/
