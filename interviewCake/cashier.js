@@ -50,9 +50,9 @@ function findCombinations(amount, coins, combi, results) {
 }
 
 
-var amount = 1;
-var denominations = [2,3];
-// debugger; findCombinations(amount, denominations, [], []);
+var amount = 6;
+var denominations = [1,2,3];
+debugger; findCombinations(amount, denominations, [], []);
 
 
 function findCombinations(amount, denominations) {
@@ -85,5 +85,5 @@ function findCombinations(amount, denominations) {
   console.log(cache[amount]);
 }
 
-debugger; findCombinations(10, [2,3,5]);
+// debugger; findCombinations(4, [1,2,3]);
 
