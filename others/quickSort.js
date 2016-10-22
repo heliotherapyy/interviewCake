@@ -96,7 +96,7 @@ function swap(array, first, second) {
   array[second] = temp;
 }
 
-var array = [5,7,2,1,4,3,8,9,5,3,1,1,10,12];
+var array = [27,3,6,-2,15,1,10,10,10];
 debugger; quickSort(array, 0, array.length -1);
 
 
