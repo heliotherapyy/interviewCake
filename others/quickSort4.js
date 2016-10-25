@@ -28,7 +28,7 @@ function getPartition(array, start, end) {
 	}
 
 	if (pivot > array[right]) {
-		swap(array, 0, right);
+		swap(array, start, right);
 	}
 
 	return right;

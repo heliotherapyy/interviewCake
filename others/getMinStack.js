@@ -27,7 +27,7 @@ Stack.prototype.pop = function() {
     }
     var popped = this.items.pop();
     if (popped === this.min) {
-    	this.mins.push(this.min);
+    	this.mins.pop();
     	this.min = this.mins[this.mins.length - 1];
     }
     return popped;
