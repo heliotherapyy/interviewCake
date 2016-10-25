@@ -28,7 +28,7 @@ function getPartition(array, start, end) {
 	}
 
 	if (pivot > array[right]) {
-		swap(array, 0, right);
+		swap(array, start, right);
 	}
 
 	return right;
@@ -41,6 +41,7 @@ function swap(array, first, second) {
 }
 
 var array = [27,3,6,-2,15,1,10,10,10];
-debugger; quickSort(array, 0, array.length - 1);
-console.log(array);
+var array2 = [65, 70, 56, 75, 60, 68];
+debugger; quickSort(array2, 0, array2.length - 1);
+console.log(array2);
 

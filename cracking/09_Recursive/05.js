@@ -37,4 +37,4 @@ function findPermutation(string) {
   return prevs;
 }
 
-findPermutation("abcdef");
+findPermutation("ab");
