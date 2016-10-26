@@ -1,33 +1,44 @@
-function makeCombinations(n) {
-  var prevs = ['()'];
-  var current = [];
-  var step = 1;
-  while (step < n) {
-    for (var i = 0; i < prevs.length; i++) {
-      var prev = prevs[i];
+/* Note
+
+Input: number
+Output: Array (combination of parentheses)
+
+Approach #1: Dynamic Programming
+
+n = 1: ()
+n = 2: ()(), (())
+n = 3: ()()(), (()()), (())(), ()(()), ((()))
+v n = 4: ()()()(), (()()()), (()())(), ()(()()), ...
+
+current = []
+*/
+
+function findCombinations(number) {
+  var cache = {}; // key: step, value: array
+  cache[1] = ['()'];
+
+  var step = 2;
+
+  // O(N = number)
+  while (step <= number) {
+    var current = [];
+    // O(N!)
+    for (var i = 0; i < cache[step - 1].length; i++) {
       var newPair = '()';
-
-      // first step
-      var first = '(' + prev + ')';
-      current.push(first);
-
-      // second step
-      var second1 = newPair + prev;
-      if (i !== prevs.length - 1) {
-        var second2 = prev + newPair;
+      var prev = cache[step - 1][i]; // (()), i = 1
+      if (i !== 0) {
+        current.push(newPair + prev);
       }
-      current.push(second1);
-      if (second2) {
-        current.push(second2);
-        second2 = null;
-      }
+
+      current.push(prev + newPair); // ()()()
+      current.push('(' + prev + ')'); // (()())
     }
-    prevs = current;
-    current = [];
+
+    cache[step] = current.slice();
     step++;
   }
 
-  console.log(prevs);
+  return cache[number];
 }
 
-debugger; makeCombinations(3);
+findCombinations(3);

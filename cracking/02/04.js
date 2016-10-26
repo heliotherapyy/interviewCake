@@ -22,93 +22,91 @@ A.next = B;
 B.next = C;
 C.next = D;
 D.next = E;
-/*
-// O(N)
-let connectNodes = (array, flag) => {
-  let lastNode;
-  let firstNode;
 
-  for (let i = 0 ; i < array.length - 1 ; i++) {
-    array[i].next = array[i+1];
-  }
+/* Notes
 
-  if (flag === "last") {
-    lastNode = array[array.length - 1];
-    return lastNode;
-  } else if (flag === "first") {
-    firstNode = array[0];
-    return firstNode;
-  } else {
-    console.error("Invalid input");
-  }
-}
+Questions:
+1. Are the values stored in each node unique? - NO
+2. Does it have to be sorted? - NO
 
-// O(N)
-let organizeNodes = (head, target) => {
-  var smallers = [];
-  var greaters = [];
-  var middle;
+Input: head of node, pivot node
+Output: head
 
-  var traverse = head;
+Example:
 
-  while (traverse) {
-    if (traverse.data < target) {
-      smallers.push(traverse);
-    } else if (traverse.data > target) {
-      greaters.push(traverse);
-    } else {
-      middle = traverse;
-    }
+5->3->4->10->7, 7
+=> 5->3->4->7->10
 
-    traverse = traverse.next;
-  }
+Approach:
+Node smalls, bigs
+smalls =  connect(smalls, 3) / 3
+smalls = connect(smalls, 4) / 4
 
-  var lastOfSmallers = connectNodes(smallers, "last");
-  lastOfSmallers.next = middle;
-  middle.next = connectNodes(greaters, "first");
+bigs = connect(bigs, 10); // 10
 
-}
+connect all three LLs
 
-organizeNodes(A, 5);
+
+"O(1) every time we push smallers values to smalls"
+
 */
 
-// Node, number -> Node
-function main(root, pivot) {
-  var left_root, left_end, right_root, right_end, same_root, same_end;
+/* Debugging
 
-  var traverse = root;
-  while (traverse) {
-    if (traverse.value < pivot) {
-      if (!left_root) {
-        left_root = left_end = traverse;
-      } else {
-        left_end.next = traverse;
-        left_end = left_end.next;
-      }
-    } else if (traverse.value > pivot) {
-      if (!right_root) {
-        right_root = traverse;
-        right_end = traverse;
-      } else {
-        right_end.next = traverse;
-        right_end = right_end.next;
-      }
+5->3->4->10->7, 7
+=> 5->3->4->7->10
+
+smallsHead: 4
+bigsHead: 10
+equalsHead: 7
+runner: null;
+
+*/
+
+function divideLL(head, pivot) {
+  var smallsHead, bigsHead, equalsHead;
+
+  var runner = head;
+
+  // O(N)
+  while (runner) {
+    if (runner.value < pivot.value) {
+      smallsHead = connect(smallsHead, runner);
+    } else if (runner.value > pivot.value) {
+      bigsHead = connect(bigsHead, runner);
     } else {
-      if (!same_root) {
-        same_root = same_end = traverse;
-      } else {
-        same_end.next = traverse;
-        same_end = same_end.next;
-      }
+      equalsHead = connect(equalsHead, runner);
     }
-    traverse = traverse.next;
+    runner = runner.next;
   }
 
-  left_end.next = same_root;
-  same_end.next = right_root;
-  right_end.next = null;
+  var smallsTail = findTail(smallsHead);
+  var equalsTail = findTail(equalsHead);
+  smallsTail.next = equalsHead;
+  equalsTail.next = bigsHead;
 
-  console.log(left_root);
+  return smallsHead;
 }
 
-debugger; main(A, 5);
+// O(1)
+function connect(head, node) {
+  if (!head) {
+    head = new Node(node.value);
+  } else {
+    var newNode = new Node(node.value);
+    newNode.next = head;
+    head = newNode;
+  }
+  return head;
+}
+
+// O(N)
+function findTail(head) {
+  while (head.next) {
+    head = head.next;
+  }
+
+  return head;
+}
+
+var answer = divideLL(A, A);
