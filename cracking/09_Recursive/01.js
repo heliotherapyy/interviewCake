@@ -56,3 +56,5 @@ function initialize(object, total) {
     object[i] = 0;
   }
 }
+
+console.log(findWays[1,2,3], 5);

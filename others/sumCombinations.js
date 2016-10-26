@@ -13,7 +13,7 @@ function findCombinations(array, total){
 		} else {
 		if (step === array[index]) {
 			cache[step].push([array[index]]);
-		} 
+		}
 			var remainder = total - array[index];
 			if (!cache[remainder]) {
 				step++;
@@ -25,7 +25,7 @@ function findCombinations(array, total){
 					cache[step].push([prevs[j].slice().push([array[index]])]);
 				}
 			}
-			
+
 		}
 		step++;
 	}
