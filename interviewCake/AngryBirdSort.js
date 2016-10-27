@@ -25,5 +25,5 @@ function AngryBirdSort(array, highest) {
 var unsortedScores = [37, 89, 41, 65, 91, 53, 53, 53];
 const HIGHEST_POSSIBLE_SCORE = 100;
 
-AngryBirdSort(unsortedScores, HIGHEST_POSSIBLE_SCORE);
+debugger; AngryBirdSort(unsortedScores, HIGHEST_POSSIBLE_SCORE);
 // returns [37, 41, 53, 65, 89, 91]
