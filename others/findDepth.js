@@ -49,7 +49,7 @@ function Node(value) {
 }
 
 var one = new Node(1);
-var two = new Node('2');
+var two = new Node(2);
 var A = new Node('A');
 var B = new Node('B');
 var C = new Node('C');
@@ -107,5 +107,73 @@ function findDepth(root, node) {
   return count;
 }
 
-debugger; var depth = findDepth(one, E);
-console.log(depth);
+// debugger; var depth = findDepth(one, E);
+// console.log(depth);
+
+function LLNode(value) {
+  this.data = value;
+  this.next = null;
+}
+
+function Queue() {
+  this.head = null;
+  this.tail = null;
+}
+
+Queue.prototype.enqueue = function(value) {
+  var newNode = new LLNode(value);
+
+  if (!this.head) {
+    this.head = this.tail = newNode;
+  } else {
+    this.tail.next = newNode;
+    this.tail = this.tail.next;
+  }
+}
+
+Queue.prototype.dequeue = function() {
+  var dequeued = this.head;
+  this.head = this.head.next;
+  if (!this.head) this.head = this.tail = null;
+  return dequeued;
+}
+
+Queue.prototype.isEmpty = function() {
+  return (this.head === null);
+}
+
+function findDepth(root, target, cache) {
+  var parents = new Queue();
+  var children = new Queue();
+  parents.enqueue(root);
+
+  var count = -1;
+
+  while (!parents.isEmpty()) {
+    var popped = parents.dequeue().data;
+    if (popped.data === target.data) {
+      return count + 1;
+    }
+    visit(popped, cache);
+
+    var adjs = popped.adjs;
+    for (var i = 0; i < adjs.length; i++) {
+      if (!isVisited(adjs[i], cache)) {
+        children.enqueue(adjs[i]);
+      }
+    }
+
+    if (parents.isEmpty()) {
+      parents = children;
+      children = new Queue();
+      count++;
+    }
+  }
+}
+
+function isVisited(node, cache) {
+  return cache[node] === true;
+}
+
+debugger; var flag = findDepth(A, E, {});
+console.log(flag);
