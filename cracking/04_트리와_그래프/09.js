@@ -27,6 +27,14 @@ var Node = function(data) {
   this.right = null;
 }
 
+/*
+          1
+        /  \
+      2     3
+    /  \     \
+  4     5     7
+*/
+
 var one = new Node(1);
 var two = new Node(2);
 var three = new Node(3);
@@ -41,7 +49,7 @@ two.right = five;
 three.right = four;
 four.right = seven;
 
-debugger; var result = findRoutes(one, 7, [], [], 0);
+debugger; var result = findRoutes(one, 3, [], [], 1);
 console.log(result);
 
 

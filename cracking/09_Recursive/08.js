@@ -1,5 +1,5 @@
-var denominations = [25, 5, 10];
-var total = 100;
+var denominations = [];
+var total = 10;
 
 function coinChange(total, denominations) {
   var cache = {};
@@ -25,4 +25,4 @@ function coinChange(total, denominations) {
   console.log(cache[total]);
 }
 
-debugger; coinChange(30, denominations);
+debugger; coinChange(total, denominations);
