@@ -31,5 +31,6 @@ function search(arr, start, end, target) {
 }
 
 var array = [15,16,1,2,3,4,5,-10,-9,-5,10,11];
-debugger; var array = search(array, 0, array.length - 1, -9);
+var array = [1,3];
+debugger; var array = search(array, 0, array.length - 1, 3);
 console.log(array);

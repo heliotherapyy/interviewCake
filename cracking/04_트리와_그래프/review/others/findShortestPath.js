@@ -39,7 +39,7 @@ function findShortestPath(origin, dest, Visited, Path) {
 
 	if (!Visited) var Visited = {};
 	if (!Path) var Path = {};
-	
+
 	var queue = [];
 	queue.push(origin);
 	visit(origin, Visited);
@@ -62,7 +62,7 @@ function findShortestPath(origin, dest, Visited, Path) {
 				Path[neighbor.data].push(neighbor.data);
 				return Path[neighbor.data];
 			}
-			
+
 		}
 	}
 }

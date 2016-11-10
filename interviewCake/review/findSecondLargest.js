@@ -22,7 +22,7 @@ D.left.left = new BinaryTree(0);
 /*
 			10
 		5		15
-	  4	  7	  13  
+	  4	  7	  13
  	2			14
   0
 */

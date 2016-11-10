@@ -23,6 +23,7 @@ console.log(answer);
 
 // From Cracking
 var array = [-1,6,3,-5,-6,10,5,2,-5,7];
+var array = [2,-8,3,-2,4,-10];
 
 // Again, should find maximum sum
 // I should think of greedy approach first

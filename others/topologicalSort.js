@@ -59,7 +59,7 @@ function update(cache, array) {
   }
 }
 
-var answer =  topologicalSort(array);
+debugger; var answer =  topologicalSort(array);
 console.log(answer);
 
 
