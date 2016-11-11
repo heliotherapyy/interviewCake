@@ -51,7 +51,7 @@ un.next = dos;
 dos.next = tres;
 
 var array = [a, one, un];
-mergeKLists(array);
+// mergeKLists(array);
 
 function mergeKLists(lists) {
   var merged = mergeTwoLists(lists[0], lists[1]);
@@ -62,23 +62,32 @@ function mergeKLists(lists) {
 }
 
 function mergeTwoLists(head1, head2) {
-  var smallest = (head1.val > head2.val) ? head2 : head1;
 
-  var cache = {};
+  var sorted = [];
 
-  var greatest = update(cache, head1, head2);
-
-  var step = greatest.val;
-  var end = smallest.val;
-  while (step >= end) {
-    if (cache[step]) {
-      greatest = insert(greatest, step);
-    }
-    step--;
+  while (head1) {
+    sorted.push(head1);
+    head1 = head1.next;
+  }
+  while (head2) {
+    sorted.push(head2);
+    head2 = head2.next;
   }
 
-  return greatest;
+  sorted.sort(function(a, b) {
+    if (a.val < b.val) return -1;
+    else return 1;
+  });
+
+  var result = sorted[0];
+  var start = sorted[0];
+  for (var i = 1; i < sorted.length; i++) {
+    start = start.next = sorted[i];
+  }
+
+  return result;
 }
+
 
 function insert(node, value) {
   var newNode = new ListNode(value);
