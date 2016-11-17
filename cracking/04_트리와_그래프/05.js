@@ -4,7 +4,7 @@
 */
 
 var Node = function(data) {
-  this.value = data;
+  this.data = data;
   this.left = null;
   this.right = null;
 }
@@ -14,7 +14,7 @@ var root_left = root.left = new Node(10);
 var root_right = root.right = new Node(30);
 
 root_leftLeft = root_left.left = new Node(5);
-root_leftRight = root_left.right = new Node(35);
+root_leftRight = root_left.right = new Node(15);
 root_rightLeft = root_right.left = new Node(25);
 root_rightRight = root_right.right = new Node(40);
 
