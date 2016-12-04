@@ -30,11 +30,6 @@ D.adjs = [two];
 */
 
 function printShortestRoute(start, end, Visited, Route) {
-  if (start.value === end.value) {
-    Route[end.value].push(start.value);
-    Route[end.value].push(end.value);
-    return Route[end.value];
-  }
 
   Route = (!Route) ? {} : Route;
   Visited = (!Visited) ? {} : Visited;
@@ -42,14 +37,11 @@ function printShortestRoute(start, end, Visited, Route) {
   var queue = [];
   queue.push(start);
   Visited[start.value] = true;
+  Route[start.value] = [];
 
   while (queue.length) {
     var node = queue[0];
     queue = queue.slice(1);
-
-    if (!Route[node.value]) {
-      Route[node.value] = [];
-    }
 
     for (var i = 0; i < node.adjs.length; i++) {
       var neighbor = node.adjs[i];
