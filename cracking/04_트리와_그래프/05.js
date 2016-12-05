@@ -1,22 +1,57 @@
-/*
-  05
-  어떤 이진 트리가 이진 탐색 트리인지 판별하는 함수를 구현하라
-*/
-
-var Node = function(data) {
-  this.data = data;
-  this.left = null;
-  this.right = null;
+var Node = function(value) {
+  this.value = value;
+  this.left = this.right = null;
 }
 
-var root = new Node(20);
-var root_left = root.left = new Node(10);
-var root_right = root.right = new Node(30);
+var createBST = function(arr, start, end) {
+  if (!arr || !arr.length) return null;
 
-root_leftLeft = root_left.left = new Node(5);
-root_leftRight = root_left.right = new Node(15);
-root_rightLeft = root_right.left = new Node(25);
-root_rightRight = root_right.right = new Node(40);
+  if (start <= end) {
+    var mid = Math.floor((start + end) / 2);
+    var middle = arr[mid];
+
+    var root = new Node(middle);
+
+    root.left = createBST(arr, start, mid - 1);
+    root.right = createBST(arr, mid + 1, end);
+  }
+
+  return root;
+}
+
+var input = [1,2,3,4,5,6,7,8,9,10];
+var root = createBST(input, 0, input.length - 1);
+
+
+/*
+          5
+      2        8
+    1  3     6   9
+        6     7     10
+*/
+
+var zero = new Node(0);
+var one = new Node(1);
+var two = new Node(2);
+var three = new Node(3);
+var four = new Node(4);
+var five = new Node(5);
+var six1 = new Node(6);
+var six2 = new Node(6);
+var seven = new Node(7);
+var eight = new Node(8);
+var nine = new Node(9);
+var ten = new Node(10);
+
+five.left = two;
+five.right = eight;
+two.left = one;
+two.right = three;
+eight.left = six2;
+eight.right = nine;
+three.right = six1;
+six1.right = seven;
+nine.right = ten;
 
 function isBST(root) {
   if (!root) {
@@ -72,5 +107,5 @@ function final(root) {
   }
 }
 
-debugger; var answer = final(root);
+debugger; var answer = final(five);
 console.log(answer);
