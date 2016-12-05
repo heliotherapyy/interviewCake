@@ -36,11 +36,9 @@ seven.left = eight;
 function findPath(root, n, path, result) {
   if (!root) return;
 
+  // Pre-order
   path = path.slice();
   path.push(root.value);
-
-  findPath(root.left, n, path, result);
-  findPath(root.right, n, path, result);
 
   var sum = 0;
   for (var i = path.length - 1; i >= 0; i--) {
@@ -53,6 +51,9 @@ function findPath(root, n, path, result) {
       result.push(newPath);
     }
   }
+
+  findPath(root.left, n, path, result);
+  findPath(root.right, n, path, result);
 
   return result;
 }
