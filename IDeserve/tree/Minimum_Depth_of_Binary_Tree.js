@@ -33,7 +33,7 @@ seven.left = eight;
      6       8
 */
 
-var getMinDepth = function(root) {
+/*var getMinDepth = function(root) {
   if (!root) return -1;
 
   var nodesByDepth = [[root]];
@@ -79,15 +79,14 @@ var isLeaf = function(root) {
 var output = optimized(one);
 console.log(output);
 
+*/
 
+var findMinDepth = function(root) {
+  if (!root) return 0;
 
+  if (!root.left && !root.right) return 1;
+  return 1 + Math.min(findMinDepth(root.left), findMinDepth(root.right));
+}
 
-
-
-
-
-
-
-
-
-
+var output = findMinDepth(one);
+console.log(output);
