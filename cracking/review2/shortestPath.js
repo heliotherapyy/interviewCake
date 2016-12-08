@@ -12,8 +12,12 @@ var D = new Node('D');
 var E = new Node('E');
 
 one.adjs = [A, B, C];
-C.adjs = [E, D];
-D.adjs = [two];
+A.adjs = [one];
+B.adjs = [one];
+C.adjs = [one, E, D];
+D.adjs = [two, C];
+E.adjs = [C];
+two.adjs = [D];
 
 /*
       1 - A
@@ -33,6 +37,7 @@ var BFS = function(start) {
 
   var queue = [];
   queue.push(start);
+  visited[start.value] = true;
 
   while (true) {
     var curr = [];
