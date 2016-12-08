@@ -11,19 +11,19 @@ var C = new Node('C');
 var D = new Node('D');
 var E = new Node('E');
 
-one.adjs = [A, B, C];
+one.adjs = [A, B, C, D];
 A.adjs = [one];
 B.adjs = [one];
 C.adjs = [one, E, D];
-D.adjs = [two, C];
+D.adjs = [one, two, C];
 E.adjs = [C];
 two.adjs = [D];
 
 /*
       1 - A
-    /   \
-  B      C - E
-        /
+    / | \
+  B   |  C - E
+      | /
       D
         \
           2
@@ -63,5 +63,34 @@ var BFS = function(start) {
   return result;
 }
 
-var output = BFS(one);
+var shortestPath = function(start, end) {
+  var visited = {};
+  var predecessor = {};
+
+  var queue = [];
+  queue.push(start);
+  visited[start.value] = true;
+  predecessor[start.value] = [start.value];
+
+  while (queue.length) {
+    var popped = queue[0];
+    queue = queue.slice(1);
+
+    for (var i = 0; i < popped.adjs.length; i++) {
+      var neighbor = popped.adjs[i];
+      if (!visited[neighbor.value]) {
+        queue.push(neighbor);
+        visited[neighbor.value] = true;
+        predecessor[neighbor.value] = predecessor[popped.value].slice();
+        predecessor[neighbor.value].push(neighbor.value);
+
+        if (neighbor.value === end.value) return predecessor[neighbor.value];
+      }
+    }
+  }
+
+  return null;
+}
+
+var output = shortestPath(one, two);
 console.log(output);
